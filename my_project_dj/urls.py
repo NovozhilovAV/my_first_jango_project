@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from myapp.views import about, login, contacts
+# from myapp.views import about, login, contacts
 from myapp import urls
 from myapp.views import index
 
