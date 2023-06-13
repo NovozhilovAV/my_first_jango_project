@@ -40,7 +40,18 @@ def drivers(request):
 
 
 def login(request):
-    return HttpResponse('<h2>Page login !!!</h2>')
+    title = 'Войти'
+    context ={'title': title, 'menu': menu}
+    # return HttpResponse('<h2>Page login !!!</h2>')
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        return HttpResponse(f'Login - {username}, Password = {password}')
+
+    if request.method == 'GET':
+        return render(request, 'myapp/login.html', context=context)
+
 
 def contacts(request, id):
     url_id = id
