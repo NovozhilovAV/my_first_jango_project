@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
+from .forms import CarForm
 
 # from .forms import AddPostForm
 # Create your views here.
@@ -11,14 +12,15 @@ menu = [{'title': 'О Сайте', 'url_name': 'about'},
         {'title': 'Клиенты', 'url_name': 'clients'},
         ]
 
-def index(request):
-    return HttpResponse('<h1>Main page - Главная страница функции index</h1>')
+#def index(request):
+#    return HttpResponse('<h1>Main page - Главная страница функции index</h1>')
 
-def index_myapp(request):
+def index(request):
     # return HttpResponse('<h1>MyApp Page</h1>')
     title = 'Моя главная страница'
     context = {'title': title, 'menu': menu}
     return render(request, 'myapp/index.html', context=context)
+
     # render - отрисовывает страницу. с параметрами
     # myapp/index.html - указывает путь к файлу
 
@@ -65,3 +67,22 @@ def contacts(request, id):
     # return HttpResponse(f'<h1>Page Contacts</h1>, id = {id}, name = {name}, age = {age}')
     return HttpResponse(f'<h1>Page Contacts</h1>, url_params_id = {url_id}, get_params - {get_params}')
 
+def add_car(request):
+    if request.method == 'GET':
+        title = 'Добавить машину'
+        form = CarForm
+        context = {'title': title, 'menu': menu, 'form': form}
+        return render(request, 'myapp/car_add.html', context=context)
+
+    if request.method == 'POST':
+        carform = CarForm(request.POST)
+        if carform.is_valid():
+            car = Car()
+            car.brand = carform.cleaned_data['brand']
+            car.model = carform.cleaned_data['model']
+            car.color = carform.cleaned_data['color']
+            car.power = carform.cleaned_data['power']
+            car.year = carform.cleaned_data['year']
+            car.save()
+        return cars(request)
+        # return render(request, 'myapp/cars.html', context=context) - так даже правильнее
