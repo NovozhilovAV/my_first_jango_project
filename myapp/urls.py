@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import about, login, contacts, index_myapp, cars, drivers
+from .views import *
 
 
 urlpatterns = [

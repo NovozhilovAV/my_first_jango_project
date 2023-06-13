@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
+
 # from .forms import AddPostForm
 # Create your views here.
 
@@ -38,7 +40,7 @@ def drivers(request):
     context = {'title': title, 'menu': menu}
     return render(request, 'myapp/drivers.html', context=context)
 
-
+@csrf_protect
 def login(request):
     title = 'Войти'
     context ={'title': title, 'menu': menu}
