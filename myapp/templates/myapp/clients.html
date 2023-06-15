@@ -4,7 +4,31 @@
 {% block content %}
 <h1>{{title}}</h1>
 Клиенты:
+<table id="clients" border="1">
+    <th>id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Дата рождения</th>
+    <th>Возраст</th>
+    <th>Город</th>
+    <th>Телефон</th>
+    <th>Почта</th>
+    <th>Дата создания</th>
+{% for client in clients %}
+         <tr>
+            <td align="center" >{{client.id}}</td>
+            <td align="center">{{client.name}}</td>
+            <td align="center">{{client.last_name}}</td>
+            <td align="center">{{client.birthday}}</td>
+            <td align="center">{{client.age}}</td>
+            <td align="center">{{client.city}}</td>
+            <td align="center">{{client.phone}}</td>
+            <td align="center">{{client.email}}</td>
+            <td align="center">{{client.created_at}}</td>
+         </tr>
+{% endfor %}
 
+</table>
 Машины:
 
 <p><a href="{% url 'add_client' %}">Добавить клиента</a></p>

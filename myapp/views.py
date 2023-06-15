@@ -88,19 +88,23 @@ def add_car(request):
         # return render(request, 'myapp/cars.html', context=context) - так даже правильнее
 
 def clients(request):
-    title = 'Clients'
-    context = {'title': title, 'menu': menu}
+    title = 'Клиенты'
+    clients = Client.objects.all()
+    context = {'title': title, 'menu': menu, 'clients': clients}
     return render(request, 'myapp/clients.html', context=context)
+
 def add_client(request):
     # return render(request, 'myapp/client_add.html')
-    titel = 'Добавить клиента'
+    titel = 'Добавить клиента'  # заголовок страницы
 
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
-            form.save()
-            return render(request, 'myapp/client_add.html', {'titel': titel})
+            form.save()    # сохроняем форму
+            return render(request, 'myapp/client_add.html', {'titel': titel})    # и выводим форму
     else:
-        form = ClientForm()
+        form = ClientForm()    # создаем объект формы- пустой- метод гет
+
     context = {'titel': titel, 'menu': menu, 'form': form}
     return render(request, 'myapp/client_add.html', context=context)
+    # отрисовка страницы для гет запроса
