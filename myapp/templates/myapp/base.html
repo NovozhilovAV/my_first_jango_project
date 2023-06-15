@@ -5,13 +5,8 @@
     <title>{{title}}</title>
 </head>
 <body>
-{% block mainmenu %}
-<ul>
-        {% for m in menu %}
-        <h2><li><a href="{% url m.url_mame %}">{{m.title}}</a></li></h2>
-        {% endfor %}
-</ul>
-{% endblock mainmenu %}
+
+
 {# открыли меню и закрыли меню - это коментарий #}
 
 {% block content %}

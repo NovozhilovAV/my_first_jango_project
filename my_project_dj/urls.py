@@ -21,7 +21,7 @@ from myapp import urls
 from myapp.views import index
 
 urlpatterns = [
-    path('', index, ),
+    path('', index),
     path('admin/', admin.site.urls),
     path('myapp/', include(urls)),
     # path('about/', about),

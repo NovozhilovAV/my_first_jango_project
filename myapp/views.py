@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
-from .forms import CarForm
-
+from .forms import CarForm, ClientForm
+from .models import *
 # from .forms import AddPostForm
 # Create your views here.
 
@@ -70,19 +70,37 @@ def contacts(request, id):
 def add_car(request):
     if request.method == 'GET':
         title = 'Добавить машину'
-        form = CarForm
+        form = CarForm    # обьект формы. пустая
         context = {'title': title, 'menu': menu, 'form': form}
         return render(request, 'myapp/car_add.html', context=context)
 
     if request.method == 'POST':
-        carform = CarForm(request.POST)
+        carform = CarForm(request.POST)  # обьект формы. заполненный
         if carform.is_valid():
-            car = Car()
-            car.brand = carform.cleaned_data['brand']
+            car = Car()    # создаем объект
+            car.brand = carform.cleaned_data['brand']    # заполняем БД
             car.model = carform.cleaned_data['model']
             car.color = carform.cleaned_data['color']
             car.power = carform.cleaned_data['power']
             car.year = carform.cleaned_data['year']
             car.save()
-        return cars(request)
+        return cars(request)    # вернули форму с введенными данными
         # return render(request, 'myapp/cars.html', context=context) - так даже правильнее
+
+def clients(request):
+    title = 'Clients'
+    context = {'title': title, 'menu': menu}
+    return render(request, 'myapp/clients.html', context=context)
+def add_client(request):
+    # return render(request, 'myapp/client_add.html')
+    titel = 'Добавить клиента'
+
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'myapp/client_add.html', {'titel': titel})
+    else:
+        form = ClientForm()
+    context = {'titel': titel, 'menu': menu, 'form': form}
+    return render(request, 'myapp/client_add.html', context=context)
