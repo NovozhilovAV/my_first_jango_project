@@ -33,6 +33,7 @@ def about(request):     # функциональный метод
 
 def cars(request):
     title = 'Машины'
+    cars = Car.objects.all()
     context = {'title': title, 'menu': menu}
     return render(request, 'myapp/cars.html', context=context)
 
@@ -69,12 +70,13 @@ def contacts(request, id):
 
 def add_car(request):
     if request.method == 'GET':
-        title = 'Добавить машину'
+        titel = 'Добавить машину'
         form = CarForm    # обьект формы. пустая
-        context = {'title': title, 'menu': menu, 'form': form}
+        context = {'title': titel, 'menu': menu, 'form': form}
         return render(request, 'myapp/car_add.html', context=context)
 
     if request.method == 'POST':
+        titel = 'Добавить машину'
         carform = CarForm(request.POST)  # обьект формы. заполненный
         if carform.is_valid():
             car = Car()    # создаем объект
@@ -84,8 +86,16 @@ def add_car(request):
             car.power = carform.cleaned_data['power']
             car.year = carform.cleaned_data['year']
             car.save()
-        return cars(request)    # вернули форму с введенными данными
-        # return render(request, 'myapp/cars.html', context=context) - так даже правильнее
+            return cars(request, 'myapp/car_add.html', {'titel': titel})    # вернули форму с введенными данными
+        # else:
+        #     form = CarForm()  # создаем объект формы- пустой- метод гет
+        #
+        # context = {'titel': titel, 'menu': menu, 'form': form}
+        # return render(request, 'myapp/client_add.html', context=context)
+        # отрисовка страницы для гет запроса
+
+        # context = {'title': title, 'menu': menu, 'form': form}
+        # return render(request, 'myapp/cars.html', context=context)   # так даже правильнее
 
 def clients(request):
     title = 'Клиенты'

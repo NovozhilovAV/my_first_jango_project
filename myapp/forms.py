@@ -15,9 +15,13 @@ class CarForm(forms.Form):
     model = forms.CharField(max_length=50, label='Модель')
     color = forms.CharField(max_length=30, label='Цвет', required=False)
     power = forms.IntegerField(label='Мощность (л/с)', required=False, min_value=1, max_value=600)
-    # required=False - поле не обязательно для заполнения
+    # required=False - поле не обязательно для заполнения в бд
     year = forms.ChoiceField(label='Год выпуска', choices=year_choices, initial=current_year)
 
+class CarForm(ModelForm):
+    class Meta:
+        model = Car
+        fields = ['brand', 'model', 'color', 'power', 'year']
 
 class ClientForm(ModelForm):
     class Meta:
@@ -26,3 +30,5 @@ class ClientForm(ModelForm):
         # fields = '__all__'   # выведем все поля
         exclude = ['age']  # поля которые не хоти выводить
     birthday = forms.DateField(input_formats=DATE_INPUT_FORMATS, label='Дата рождения')
+    # в настройках (settings.py) указали как хотим заполнять дату, импортировали модуль из настроек
+    # from my_project_dj.settings import DATE_INPUT_FORMATS
