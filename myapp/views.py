@@ -31,13 +31,6 @@ def about(request):     # функциональный метод
     # return HttpResponse('About site, plies')
     # request потому как мы отправляем запрос на сайт
 
-def cars(request):
-    title = 'Машины'
-    cars = Car.objects.all()
-    context = {'title': title, 'menu': menu}
-    return render(request, 'myapp/cars.html', context=context)
-
-
 def drivers(request):
     title = 'Водители'
     context = {'title': title, 'menu': menu}
@@ -68,32 +61,52 @@ def contacts(request, id):
     # return HttpResponse(f'<h1>Page Contacts</h1>, id = {id}, name = {name}, age = {age}')
     return HttpResponse(f'<h1>Page Contacts</h1>, url_params_id = {url_id}, get_params - {get_params}')
 
+
+def cars(request):
+    title = 'Машины'
+    cars = Car.objects.all()
+    context = {'title': title, 'menu': menu, 'cars': cars}
+    return render(request, 'myapp/cars.html', context=context)
+
 def add_car(request):
-    if request.method == 'GET':
-        titel = 'Добавить машину'
-        form = CarForm    # обьект формы. пустая
-        context = {'title': titel, 'menu': menu, 'form': form}
-        return render(request, 'myapp/car_add.html', context=context)
+    titel = 'Добавить машину'
+
+    # if request.method == 'GET':
+    #     # titel = 'Добавить машину'
+    #     form = CarForm    # обьект формы. пустая
+    #     context = {'title': titel, 'menu': menu, 'form': form}
+    #     return render(request, 'myapp/car_add.html', context=context)
 
     if request.method == 'POST':
-        titel = 'Добавить машину'
-        carform = CarForm(request.POST)  # обьект формы. заполненный
-        if carform.is_valid():
-            car = Car()    # создаем объект
-            car.brand = carform.cleaned_data['brand']    # заполняем БД
-            car.model = carform.cleaned_data['model']
-            car.color = carform.cleaned_data['color']
-            car.power = carform.cleaned_data['power']
-            car.year = carform.cleaned_data['year']
-            car.save()
-            return cars(request, 'myapp/car_add.html', {'titel': titel})    # вернули форму с введенными данными
+        # ================== добавил ++==============
+        form = CarForm(request.POST)
+        if form.is_valid():
+            form.save()  # сохроняем форму
+            return render(request, 'myapp/car_add.html', {'titel': titel})  # и выводим форму
+        else:
+            form = CarForm()  # создаем объект формы- пустой- метод гет
+
+        context = {'titel': titel, 'menu': menu, 'form': form}
+        return render(request, 'myapp/car_add.html', context=context)
+        #=================== вот этот код добавил ==================
+
+        # titel = 'Добавить машину'
+        # carform = CarForm(request.POST)  # обьект формы. заполненный
+        # if carform.is_valid():
+        #     car = Car()    # создаем объект
+        #     car.brand = carform.cleaned_data['brand']    # заполняем БД
+        #     car.model = carform.cleaned_data['model']
+        #     car.color = carform.cleaned_data['color']
+        #     car.power = carform.cleaned_data['power']
+        #     car.year = carform.cleaned_data['year']
+        #     car.save()
+        #     return cars(request, 'myapp/car_add.html', {'titel': titel})    # вернули форму с введенными данными
         # else:
         #     form = CarForm()  # создаем объект формы- пустой- метод гет
         #
         # context = {'titel': titel, 'menu': menu, 'form': form}
         # return render(request, 'myapp/client_add.html', context=context)
         # отрисовка страницы для гет запроса
-
         # context = {'title': title, 'menu': menu, 'form': form}
         # return render(request, 'myapp/cars.html', context=context)   # так даже правильнее
 
