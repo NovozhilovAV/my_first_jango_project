@@ -21,7 +21,8 @@ class CarForm(forms.Form):
 class CarForm(ModelForm):
     class Meta:
         model = Car
-        fields = ['brand', 'model', 'color', 'power', 'year']
+        # fields = ['brand', 'model', 'color', 'power', 'year']
+        fields = '__all__'
 
 class ClientForm(ModelForm):
     class Meta:
