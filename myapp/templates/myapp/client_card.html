@@ -1,0 +1,23 @@
+{% extends 'myapp/base.html' %}
+{# эта строка позволяет скопировать все из файла base.html #}
+
+{% block content %}
+<h1>{{title}}</h1>
+Клиент:
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>{{client.id}}</td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>{{client.name}}</td>
+    </tr>
+    <tr>
+        <td>Фамилия</td>
+        <td>{{client.last_name}}</td>
+    </tr>    # доделать остальные поля
+</table>
+
+
+{% endblock %}

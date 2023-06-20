@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from .forms import CarForm, ClientForm
 from .models import *
+import datetime
 # from .forms import AddPostForm
 # Create your views here.
 
@@ -82,19 +83,20 @@ def add_car(request):
         form = CarForm(request.POST)
         if form.is_valid():
             form.save()  # сохроняем форму
-            return render(request, 'myapp/car_add.html', {'titel': titel})  # и выводим форму
-        else:
-            form = CarForm()  # создаем объект формы- пустой- метод гет
+            # return render(request, 'myapp/car_add.html', {'titel': titel})  # и выводим форму
+            return cars(request)
+    else:
+        form = CarForm()  # создаем объект формы- пустой- метод гет
 
-        context = {'titel': titel, 'menu': menu, 'form': form}
-        return render(request, 'myapp/car_add.html', context=context)
+    context = {'titel': titel, 'menu': menu, 'form': form}
+    return render(request, 'myapp/car_add.html', context=context)
         #=================== вот этот код добавил ==================
 
         # titel = 'Добавить машину'
         # carform = CarForm(request.POST)  # обьект формы. заполненный
         # if carform.is_valid():
         #     car = Car()    # создаем объект
-        #     car.brand = carform.cleaned_data['brand']    # заполняем БД
+        #     car.brand = carform.cleaned_data['brand']    #  и заполняем БД
         #     car.model = carform.cleaned_data['model']
         #     car.color = carform.cleaned_data['color']
         #     car.power = carform.cleaned_data['power']
@@ -112,7 +114,7 @@ def add_car(request):
 
 def clients(request):
     title = 'Клиенты'
-    clients = Client.objects.all()
+    clients = Client.objects.all()   # 19:25
     context = {'title': title, 'menu': menu, 'clients': clients}
     return render(request, 'myapp/clients.html', context=context)
 
@@ -123,11 +125,24 @@ def add_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
-            form.save()    # сохроняем форму
-            return render(request, 'myapp/client_add.html', {'titel': titel})    # и выводим форму
+            instance = form.save(commit=False)    # 19:48
+            age = datetime.date.today().year - form.cleaned_data['birthday'].year
+            instance.age = age
+            instance.save()
+            # form.save()    # сохроняем форму
+            # return render(request, 'myapp/client_add.html', {'titel': titel})    # и выводим форму
+            return clients(request)
     else:
         form = ClientForm()    # создаем объект формы- пустой- метод гет
 
     context = {'titel': titel, 'menu': menu, 'form': form}
     return render(request, 'myapp/client_add.html', context=context)
     # отрисовка страницы для гет запроса
+
+def client_card(request, pk):
+    title = 'Client information'
+    # client = Client.objects.get(pk=pk)
+    client = get_object_or_404(Client, pk=pk)
+    context = {'menu': menu, 'title': title, 'client': client}
+
+    return render(request, 'myapp/client_card.html', context=context)

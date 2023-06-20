@@ -31,5 +31,5 @@ class ClientForm(ModelForm):
         # fields = '__all__'   # выведем все поля
         exclude = ['age']  # поля которые не хоти выводить
     birthday = forms.DateField(input_formats=DATE_INPUT_FORMATS, label='Дата рождения')
-    # в настройках (settings.py) указали как хотим заполнять дату, импортировали модуль из настроек
+    # переопределили поле - в настройках (settings.py) указали как хотим заполнять дату, импортировали модуль из настроек
     # from my_project_dj.settings import DATE_INPUT_FORMATS

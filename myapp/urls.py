@@ -12,6 +12,7 @@ urlpatterns = [
     # path('contacts/<int:id>/', contacts),    # идентификатор параметра
     path('contacts/<str:id>/', contacts, name='contacts'),
     path('add_client/', add_client, name='add_client'),
+    path('clients/<int:pk>', client_card, name='client_card'),
     path('clients/', clients, name='clients'),
 
 ]
