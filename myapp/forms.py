@@ -11,6 +11,7 @@ def current_year():
     return datetime.date.today().year
 
 class CarForm(forms.Form):
+    # работаем средствами класса forms.Form - описываем модель машины полями. создаем объект во views
     brand = forms.CharField(max_length=50, label='Марка')
     model = forms.CharField(max_length=50, label='Модель')
     color = forms.CharField(max_length=30, label='Цвет', required=False)
@@ -31,5 +32,5 @@ class ClientForm(ModelForm):
         # fields = '__all__'   # выведем все поля
         exclude = ['age']  # поля которые не хоти выводить
     birthday = forms.DateField(input_formats=DATE_INPUT_FORMATS, label='Дата рождения')
-    # переопределили поле - в настройках (settings.py) указали как хотим заполнять дату, импортировали модуль из настроек
+    # переопределили поле,в настройках(settings.py) указали как хотим заполнять дату, импортировали модуль из настроек
     # from my_project_dj.settings import DATE_INPUT_FORMATS

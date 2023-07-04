@@ -37,3 +37,26 @@ class Client(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Телефон')
     email = models.EmailField(verbose_name='Эл. почта')
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Employee(models.Model):
+    edu_choises = [('midle', 'среднее'),
+                   ('high', 'высшее'),
+                   ('professional', 'профессиональное'),
+    ]
+
+    firstname = models.CharField(max_length=50, verbose_name='Имя')
+    lastname = models.CharField(max_length=50, verbose_name='Фамилия')
+    birthday = models.DateField(verbose_name='Дата рождения')
+    position = models.CharField(max_length=50, verbose_name='Должность')
+    education = models.CharField(max_length=30, choices=edu_choises)
+
+    def __str__(self):
+        return ' '.join([str(self.firstname), str(self.lastname)])
+
+    def get_absolute_url(self):
+        return reverse('employee_list')
+
+    class Meta:
+        vebrose_name = 'Сотрудник'
+        vebrose_name_plural = 'Сотрудники'

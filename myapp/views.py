@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_protect
 from .forms import CarForm, ClientForm
 from .models import *
 import datetime
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 # from .forms import AddPostForm
 # Create your views here.
 
@@ -73,9 +74,9 @@ def add_car(request):
     titel = 'Добавить машину'
 
     # if request.method == 'GET':
-    #     # titel = 'Добавить машину'
-    #     form = CarForm    # обьект формы. пустая
-    #     context = {'title': titel, 'menu': menu, 'form': form}
+    #     # title = 'Добавить машину'
+    #     form = CarForm    # обьект формы. пустая - из файла forms
+    #     context = {'title': title, 'menu': menu, 'form': form}
     #     return render(request, 'myapp/car_add.html', context=context)
 
     if request.method == 'POST':
@@ -120,7 +121,7 @@ def clients(request):
 
 def add_client(request):
     # return render(request, 'myapp/client_add.html')
-    titel = 'Добавить клиента'  # заголовок страницы
+    title = 'Добавить клиента'  # заголовок страницы
 
     if request.method == 'POST':
         form = ClientForm(request.POST)
@@ -130,12 +131,12 @@ def add_client(request):
             instance.age = age
             instance.save()
             # form.save()    # сохроняем форму
-            # return render(request, 'myapp/client_add.html', {'titel': titel})    # и выводим форму
+            # return render(request, 'myapp/client_add.html', {'title': title})    # и выводим форму
             return clients(request)
     else:
         form = ClientForm()    # создаем объект формы- пустой- метод гет
 
-    context = {'titel': titel, 'menu': menu, 'form': form}
+    context = {'title': title, 'menu': menu, 'form': form}
     return render(request, 'myapp/client_add.html', context=context)
     # отрисовка страницы для гет запроса
 
@@ -146,3 +147,18 @@ def client_card(request, pk):
     context = {'menu': menu, 'title': title, 'client': client}
 
     return render(request, 'myapp/client_card.html', context=context)
+
+
+class EmployeeList(ListView):
+    model = Employee
+    template_name = 'myapp/employee_list.html'
+    context_object_name = 'employees'
+
+    def get_context_data(self, **kwargs):
+        # получение общего контекста из родительского класса
+        context = super().get_context_data(**kwargs)
+        # изменение родительского контекста - добавление ключей словаря
+        context['title'] = 'Сотрудники'
+        context['count'] = Employee.objects.count()
+        context['menu'] = menu
+        return context
