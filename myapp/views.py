@@ -40,7 +40,8 @@ def about(request):     # функциональный метод
 
 def drivers(request):
     title = 'Водители'
-    context = {'title': title, 'menu': menu}
+    drivers = Driver.objects.all()
+    context = {'title': title, 'menu': menu, 'objects': drivers}
     return render(request, 'myapp/drivers.html', context=context)
 
 @csrf_protect
@@ -125,6 +126,8 @@ def clients(request):
     context = {'title': title, 'menu': menu, 'clients': clients}
     return render(request, 'myapp/clients.html', context=context)
 
+def add_driver(request):
+    pass
 def add_client(request):
     # return render(request, 'myapp/client_add.html')
     title = 'Добавить клиента'  # заголовок страницы
@@ -155,7 +158,7 @@ def client_card(request, pk):
 
     return render(request, 'myapp/client_card.html', context=context)
 
-
+# классовый метод определенния
 class EmployeeList(ListView):
     model = Employee
     template_name = 'myapp/employee_list.html'

@@ -20,12 +20,12 @@ urlpatterns = [
     path('clients/<int:pk>', client_card, name='client_card'),
 
 
-    path('employees/', EmployeeList.as_wiew(), name='employee_list'),
-    path('employees/<int:pk/>', EmployeeDetail.as_view(), name='employee_detail'),
+    path('employees/', EmployeeList.as_view(), name='employee_list'),
+    path('employees/<int:pk>/', EmployeeDetail.as_view(), name='employee_detail'),
     path('employees_form/', EmployeeCreate.as_view(), name='employee_create'),
     path('employees/<int:pk>/', EmployeeUpdate.as_view(), name='employee_update'),
 
-    path('orders/', OrderList.as_wiew(), name='order_list'),
+    path('orders/', OrderList.as_view(), name='order_list'),
     path('order_form/', OrderCreate.as_view(), name='order-form'),
 
     # path('cars/search', car_search, name='car-search')

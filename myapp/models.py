@@ -68,8 +68,8 @@ class Employee(models.Model):
         return reverse('employee_list')
 
     class Meta:
-        vebrose_name = 'Сотрудник'
-        vebrose_name_plural = 'Сотрудники'
+        verbose_name = 'Сотрудник'
+        verbose_name_plural = 'Сотрудники'
 
 
 class Car_brand(models.Model):
