@@ -5,6 +5,7 @@ from .forms import CarForm, ClientForm
 from .models import *
 import datetime
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.urls import reverse, reverse_lazy
 # from .forms import AddPostForm
 # Create your views here.
 
@@ -162,3 +163,43 @@ class EmployeeList(ListView):
         context['count'] = Employee.objects.count()
         context['menu'] = menu
         return context
+
+class EmployeeDetail(DetailView):
+    model = Employee
+    template_name = 'myapp/employee_detail.html'
+    context_object_name = 'employee'
+
+    def get_context_data(self, **kwargs):
+        # получение общего контекста из родительского класса
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Информация о сотруднике'
+        context['menu'] = menu
+
+        return context
+
+
+class EmployeeCreate(CreateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'myapp/employee_form.html'
+
+
+class EmployeeUpdate(UpdateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'myapp/employee_update.html'
+
+
+# class EmployeeDelete(DeleteView):
+#     model = Employee
+#     template_name = 'main/delete.html'
+#     success_url = reverse_lazy('main:employee_list')
+
+
+# def car_search(request):
+#     if request.method == 'GET':
+#         query = request.GET.get('query')
+#         ft = Q(model__icontains=query) | Q(year__icontains=query) | Q(brand__name__contains=query)
+#         results = Car.objects.filter(ft)
+#
+#         return cars(request, cars=results)

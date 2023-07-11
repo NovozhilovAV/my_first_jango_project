@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+<!--{# эта строка позволяет скопировать все из файла base.html #}-->
+ 
+{% block content %}
+<h1>{{title}}</h1>
+Содержимое страницы Сотрудники
+
+<table id="employeey" border="2">
+    <th>id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Дата рождения</th>
+    <th>Должность</th>
+    <th>Образование</th>
+
+    {% for emp in page_obj %}
+         <tr>
+            <td align="center" >{{emp.id}}</td>
+            <td align="center">
+                <a href="{% url 'employee-detail' pk=emp.id %}">{{emp.firstname}}</a>
+
+            </td>
+            <td align="center">{{emp.lastname}}</td>
+            <td align="center">{{emp.birthday}}</td>
+            <td align="center">{{emp.position}}</td>
+            <td align="center">{{emp.education}}</td>
+         </tr>
+{% endfor %}
+
+</table>
+Количество - {{count}}
+
+
+<p><a href="{% url 'myapp:employee-form' %}">Добавить сотрудника</a></p>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
