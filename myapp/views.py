@@ -190,10 +190,10 @@ class EmployeeUpdate(UpdateView):
     template_name = 'myapp/employee_update.html'
 
 
-# class EmployeeDelete(DeleteView):
-#     model = Employee
-#     template_name = 'main/delete.html'
-#     success_url = reverse_lazy('main:employee_list')
+class EmployeeDelete(DetailView):
+    model = Employee
+    template_name = 'main/delete.html'
+    success_url = reverse_lazy('main:employee_list')
 
 
 # def car_search(request):
