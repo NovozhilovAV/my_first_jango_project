@@ -6,6 +6,8 @@ from .models import *
 import datetime
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.urls import reverse, reverse_lazy
+from django.db.models import Q
+from django.core.paginator import Paginator
 # from .forms import AddPostForm
 # Create your views here.
 
@@ -13,6 +15,8 @@ menu = [{'title': 'О Сайте', 'url_name': 'about'},
         {'title': 'Машины парка', 'url_name': 'cars'},
         {'title': 'Водители парка', 'url_name': 'drivers'},
         {'title': 'Клиенты', 'url_name': 'clients'},
+        {'title': 'Сотрудники', 'url_name': 'employee_list'},
+        {'title': 'Заказы', 'url_name': 'order_list'},
         ]
 
 #def index(request):
@@ -71,6 +75,7 @@ def cars(request):
     context = {'title': title, 'menu': menu, 'cars': cars}
     return render(request, 'myapp/cars.html', context=context)
 
+# @staff_member_required
 def add_car(request):
     titel = 'Добавить машину'
 
@@ -138,6 +143,7 @@ def add_client(request):
         form = ClientForm()    # создаем объект формы- пустой- метод гет
 
     context = {'title': title, 'menu': menu, 'form': form}
+
     return render(request, 'myapp/client_add.html', context=context)
     # отрисовка страницы для гет запроса
 
@@ -192,14 +198,24 @@ class EmployeeUpdate(UpdateView):
 
 class EmployeeDelete(DetailView):
     model = Employee
-    template_name = 'main/delete.html'
+    template_name = 'myapp/delete.html'
     success_url = reverse_lazy('main:employee_list')
 
 
-# def car_search(request):
-#     if request.method == 'GET':
-#         query = request.GET.get('query')
-#         ft = Q(model__icontains=query) | Q(year__icontains=query) | Q(brand__name__contains=query)
-#         results = Car.objects.filter(ft)
-#
-#         return cars(request, cars=results)
+def car_search(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        ft = Q(model__icontains=query) | Q(year__icontains=query) | Q(brand__name__contains=query)
+        results = Car.objects.filter(ft)
+
+        return cars(request, cars=results)
+
+class OrderCreate(CreateView):
+    model = Order
+    fields = '__all__'
+    template_name = 'myapp/order_form.html'
+
+class OrderList(ListView):
+    model = Order
+    template_name = 'myapp/order_list.html'
+    context_object_name = 'objects'
