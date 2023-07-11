@@ -88,7 +88,7 @@ def add_car(request):
 
     if request.method == 'POST':
         # ================== добавил ++==============
-        form = CarForm(request.POST)
+        form = CarForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()  # сохроняем форму
             # return render(request, 'myapp/car_add.html', {'titel': titel})  # и выводим форму
