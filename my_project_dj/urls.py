@@ -19,7 +19,7 @@ from django.urls import path, include
 # from myapp.views import about, login, contacts
 from myapp import urls
 from myapp.views import index
-from Autopark import settings
+# from Autopark import settings
 
 
 urlpatterns = [
@@ -31,5 +31,5 @@ urlpatterns = [
     # path('contacts/', contacts),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

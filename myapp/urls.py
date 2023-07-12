@@ -28,6 +28,6 @@ urlpatterns = [
     path('orders/', OrderList.as_view(), name='order_list'),
     path('order_form/', OrderCreate.as_view(), name='order-form'),
 
-    # path('cars/search', car_search, name='car-search')
+    path('cars/search', car_search, name='car-search'),
 
 ]

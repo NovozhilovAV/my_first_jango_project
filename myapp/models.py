@@ -8,7 +8,7 @@ class Driver(models.Model):
     name = models.CharField(max_length=100, verbose_name='Имя')
     age = models.IntegerField(verbose_name='Возраст')
     city = models.CharField(max_length=100, verbose_name='Город')
-    is_activated = models.BooleanField(verbose_name='Активация')
+    is_activated = models.BooleanField(verbose_name='Активация', defalt=True)
 
     def __str__(self):
         return self.name
@@ -72,7 +72,7 @@ class Employee(models.Model):
         verbose_name_plural = 'Сотрудники'
 
 
-class Car_brand(models.Model):
+class Carbrand(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
