@@ -50,6 +50,7 @@ class Client(models.Model):
 
 
 class Employee(models.Model):
+    # Выбираем образование из списка сотрудника
     edu_choises = [('midle', 'среднее'),
                    ('high', 'высшее'),
                    ('professional', 'профессиональное'),
@@ -63,16 +64,19 @@ class Employee(models.Model):
 
     def __str__(self):
         return ' '.join([str(self.firstname), str(self.lastname)])
+    #  переопределяем для вывода имя и фамилии
 
     def get_absolute_url(self):
         return reverse('employee_list')
+    # ссылка для перехода к описанию сотрудника
+    # получаем адрес поабсолютному имени пути
 
     class Meta:
         verbose_name = 'Сотрудник'
         verbose_name_plural = 'Сотрудники'
 
 
-class Carbrand(models.Model):
+class Car_Brand(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -93,7 +97,7 @@ class Car(models.Model):
         ('синий', 'синий'),
     )
 
-    brand = models.ForeignKey(Car_brand, on_delete=models.CASCADE, related_name='cars', verbose_name='Марка')
+    brand = models.ForeignKey(Car_Brand, on_delete=models.CASCADE, related_name='cars', verbose_name='Марка')
     model = models.CharField(max_length=30, verbose_name='Модель')
     color = models.CharField(max_length=20, choices=colors, null=False)
     power = models.IntegerField(verbose_name='Мощность')

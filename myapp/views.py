@@ -7,6 +7,7 @@ import datetime
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.urls import reverse, reverse_lazy
 from django.db.models import Q
+from .filters import CarFilter
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.paginator import Paginator
@@ -181,12 +182,13 @@ class EmployeeList(ListView):
     model = Employee
     template_name = 'myapp/employee_list.html'
     context_object_name = 'employees'
+    # имя передается в шаблон для преребора сотрудников
 
     def get_context_data(self, **kwargs):
         # получение общего контекста из родительского класса
         context = super().get_context_data(**kwargs)
         # изменение родительского контекста - добавление ключей словаря
-        context['title'] = 'Сотрудники'
+        context['title'] = 'Сотрудники'    # заголовок
         context['count'] = Employee.objects.count()
         context['menu'] = menu
         return context
@@ -209,6 +211,7 @@ class EmployeeCreate(CreateView):
     model = Employee
     fields = '__all__'
     template_name = 'myapp/employee_form.html'
+    # представления для создания объекта
 
 
 class EmployeeUpdate(UpdateView):

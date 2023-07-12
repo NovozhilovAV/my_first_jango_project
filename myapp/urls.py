@@ -19,7 +19,7 @@ urlpatterns = [
     path('add_driver/', add_driver, name='add_driver'),
     path('clients/<int:pk>', client_card, name='client_card'),
 
-
+    # указываем путь, и вызывве его как представление as_view()
     path('employees/', EmployeeList.as_view(), name='employee_list'),
     path('employees/<int:pk>/', EmployeeDetail.as_view(), name='employee_detail'),
     path('employees_form/', EmployeeCreate.as_view(), name='employee_create'),
