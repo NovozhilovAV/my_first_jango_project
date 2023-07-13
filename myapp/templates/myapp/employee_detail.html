@@ -10,6 +10,6 @@
   <li>Должность - {{employee.position}}</li>
   <li>Образование - {{employee.education}}</li>
 </ul>
-<a href="{% url 'myapp:employee-update' pk=employee.id %}"> Изменить </a>
-<p><a href="{% url 'myapp:employee-delete' pk=employee.id %}"> Удалить </a></p>
+<a href="{% url 'myapp:employee_update' pk=employee.id %}"> Изменить </a>
+<p><a href="{% url 'myapp:employee_delete' pk=employee.id %}"> Удалить </a></p>
 {% endblock %}

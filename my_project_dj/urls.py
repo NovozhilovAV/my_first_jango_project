@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 # from myapp.views import about, login, contacts
 from myapp import urls
+# from myapp import urls as main_urls
+# from users import urls as users_urls
 from myapp.views import index
 # from Autopark import settings
 
@@ -26,6 +28,7 @@ urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
     path('myapp/', include(urls)),
+    # path('users/', include(users_urls)),
     # path('about/', about),
     # path('login/', login),    # они нам в этом месте больше не нужны
     # path('contacts/', contacts),

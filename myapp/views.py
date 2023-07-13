@@ -183,6 +183,8 @@ class EmployeeList(ListView):
     template_name = 'myapp/employee_list.html'
     context_object_name = 'employees'
     # имя передается в шаблон для преребора сотрудников
+    # paginate_by = 5
+    # выводит количество сотрудников на странице
 
     def get_context_data(self, **kwargs):
         # получение общего контекста из родительского класса
@@ -222,7 +224,8 @@ class EmployeeUpdate(UpdateView):
 class EmployeeDelete(DetailView):
     model = Employee
     template_name = 'myapp/delete.html'
-    success_url = reverse_lazy('main:employee_list')
+    success_url = reverse_lazy('employee_list')
+    # после удаления отобразит страницу с сотрудниками
 
 
 def car_search(request):
@@ -230,7 +233,6 @@ def car_search(request):
         query = request.GET.get('query')
         ft = Q(model__icontains=query) | Q(year__icontains=query) | Q(brand__name__contains=query)
         results = Car.objects.filter(ft)
-
         return cars(request, cars=results)
 
 class OrderCreate(CreateView):

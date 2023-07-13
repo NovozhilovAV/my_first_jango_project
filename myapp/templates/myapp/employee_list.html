@@ -37,9 +37,10 @@
 
 <div class="pagination">
     <span class="step-links">
+    <!-- 1 видео от 4.07 - 1:12:00- объяснение   -->
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page=1">&laquo; В начало </a>
+            <a href="?page={{ page_obj.previous_page_number }}"> << Предыдущая</a>
         {% endif %}
 
         <span class="current">
@@ -47,8 +48,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}">Следующая/next >> </a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя/last &raquo; </a>
         {% endif %}
     </span>
 </div>
