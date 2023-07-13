@@ -201,22 +201,21 @@ class EmployeeDetail(DetailView):
     def get_context_data(self, **kwargs):
         # получение общего контекста из родительского класса
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Информация о сотруднике'
+        context['title'] = 'Информация о сотруднике'    # заголовок
         context['menu'] = menu
-
         return context
 
 
 class EmployeeCreate(CreateView):
     model = Employee
-    fields = '__all__'
+    fields = '__all__'    # Все поля добавляем
     template_name = 'myapp/employee_form.html'
     # представления для создания объекта
 
 
 class EmployeeUpdate(UpdateView):
     model = Employee
-    fields = '__all__'
+    fields = '__all__'    # Все поля добавляем
     template_name = 'myapp/employee_update.html'
 
 

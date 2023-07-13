@@ -69,7 +69,7 @@ class Employee(models.Model):
     def get_absolute_url(self):
         return reverse('employee_list')
     # ссылка для перехода к описанию сотрудника
-    # получаем адрес поабсолютному имени пути
+    # получаем адрес по абсолютному имени пути
 
     class Meta:
         verbose_name = 'Сотрудник'
