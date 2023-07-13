@@ -22,6 +22,7 @@ from myapp import urls
 # from users import urls as users_urls
 from myapp.views import index
 # from Autopark import settings
+# from django.conf.urls.static import static
 
 
 urlpatterns = [

@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render
 from .forms import UserRegistrationForm
-from main.views import menu
+from myapp.views import menu
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from Autopark.settings import LOGIN_REDIRECT_URL
+from my_project_dj.settings import LOGIN_REDIRECT_URL
 
 
 # Create your views here.
