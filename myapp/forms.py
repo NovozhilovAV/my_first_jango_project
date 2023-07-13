@@ -46,7 +46,24 @@ class OrderForm(forms.ModelForm):
 #     age = forms.IntegerField(label='Возраст', min_value=18, max_value=120)
 #     city = forms.CharField(max_length=50, label='Город', required=False)
 
+
 class DriverForm(forms.ModelForm):
     class Meta:
         model = Driver
         exclude = ['is_activated']
+
+
+class ClientForm(ModelForm):
+    class Meta:
+        model = Client
+        exclude = ['age', 'created_at']
+
+    birthday = forms.DateField(input_formats=DATE_INPUT_FORMATS, label='Дата рождения')
+
+
+class EmployeeForm(forms.ModelForm):
+    birthday = forms.DateField(input_formats=DATE_INPUT_FORMATS, label='Дата рождения')
+    class Meta:
+        model = Employee
+        fields = '__all__'
+

@@ -211,6 +211,7 @@ class EmployeeDetail(DetailView):
 class EmployeeCreate(CreateView):
     model = Employee
     fields = '__all__'    # Все поля добавляем
+    # form_class = EmployeeForm
     template_name = 'myapp/employee_form.html'
     # представления для создания объекта
 
