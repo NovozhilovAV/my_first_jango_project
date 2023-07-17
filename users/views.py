@@ -8,7 +8,7 @@ from my_project_dj.settings import LOGIN_REDIRECT_URL
 
 
 # Create your views here.
-
+# Видео о 6.07.23 8 минута
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -42,6 +42,7 @@ def log_in(request):
             # url = reverse('main:index')
             url = request.GET.get('next', LOGIN_REDIRECT_URL)
             return redirect(url)
+    #     1 видео от 6.07 53 минута
 
     return render(request, 'users/login.html', {'form': form, 'menu': menu})
 

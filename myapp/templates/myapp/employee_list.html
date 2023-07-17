@@ -17,7 +17,7 @@
          <tr>
             <td align="center" >{{emp.id}}</td>
             <td align="center">
-                <a href="{% url 'employee_detail' pk=emp.id %}">{{emp.firstname}}</a>
+                <a href="{% url 'main:employee_detail' pk=emp.id %}">{{emp.firstname}}</a>
 <!-- создает ссылку, emp-переменнная цикла  -->
 
             </td>
@@ -32,12 +32,13 @@
 Количество - {{count}}
 
 
-<p><a href="{% url 'myapp:employee-form' %}">Добавить сотрудника</a></p>
+<p><a href="{% url 'main:employee_form' %}">Добавить сотрудника</a></p>
 
 
 <div class="pagination">
     <span class="step-links">
-    <!-- 1 видео от 4.07 - 1:12:00- объяснение   -->
+    <!-- 1 видео от 4.07 - 1:12:00- объяснение,
+      если объект страницы имеет предыдущие записи то выводятся ссылки...-->
         {% if page_obj.has_previous %}
             <a href="?page=1">&laquo; В начало </a>
             <a href="?page={{ page_obj.previous_page_number }}"> << Предыдущая</a>

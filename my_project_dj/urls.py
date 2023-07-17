@@ -17,9 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 # from myapp.views import about, login, contacts
-from myapp import urls
-# from myapp import urls as main_urls
-# from users import urls as users_urls
+# from myapp import urls
+from myapp import urls as myapp_urls
+from users import urls as users_urls
 from myapp.views import index
 # from Autopark import settings
 # from django.conf.urls.static import static
@@ -28,8 +28,8 @@ from myapp.views import index
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
-    path('myapp/', include(urls)),
-    # path('users/', include(users_urls)),
+    path('myapp/', include(myapp_urls)),
+    path('users/', include(users_urls)),
     # path('about/', about),
     # path('login/', login),    # они нам в этом месте больше не нужны
     # path('contacts/', contacts),
@@ -37,3 +37,5 @@ urlpatterns = [
 
 # if settings.DEBUG:
 #     urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+
+# корневой маршрутизатор - путей приложений

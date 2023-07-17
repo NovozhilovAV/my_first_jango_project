@@ -52,7 +52,8 @@ def contacts(request, id):
     # return HttpResponse(f'<h1>Page Contacts</h1>, id = {id}, name = {name}, age = {age}')
     return HttpResponse(f'<h1>Page Contacts</h1>, url_params_id = {url_id}, get_params - {get_params}')
 
-
+@login_required
+#  этот декоратор требует авторизацию
 def cars(request, cars=None):
     title = 'Машины'
     # cars = Car.objects.all()
@@ -108,6 +109,8 @@ def add_car(request):
         return cars(request)
 
 
+@ staff_member_required
+#  этот декоратор требует авторизацию, котор при входе в джанго
 def clients(request):
     title = 'Клиенты'
     clients = Client.objects.all()   # 19:25
@@ -208,6 +211,7 @@ class EmployeeDetail(DetailView):
         return context
 
 
+#  создаем класс для добавления
 class EmployeeCreate(CreateView):
     model = Employee
     fields = '__all__'    # Все поля добавляем
@@ -216,12 +220,14 @@ class EmployeeCreate(CreateView):
     # представления для создания объекта
 
 
+#  создаем класс для обновления + создали html форму
 class EmployeeUpdate(UpdateView):
     model = Employee
     fields = '__all__'    # Все поля добавляем
     template_name = 'myapp/employee_update.html'
 
 
+#  создаем класс для удаления
 class EmployeeDelete(DetailView):
     model = Employee
     template_name = 'myapp/delete.html'
