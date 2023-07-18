@@ -49,7 +49,7 @@ def log_in(request):
 
 def log_out(request):
     logout(request)
-    url = reverse('main:index')
+    url = reverse(' myapp:index')
     return redirect(url)
 
 # Create your views here.

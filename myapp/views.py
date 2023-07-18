@@ -14,12 +14,12 @@ from django.core.paginator import Paginator
 # from .forms import AddPostForm
 # Create your views here.
 
-menu = [{'title': 'О Сайте', 'url_name': 'about'},
-        {'title': 'Машины парка', 'url_name': 'cars'},
-        {'title': 'Водители парка', 'url_name': 'drivers'},
-        {'title': 'Клиенты', 'url_name': 'clients'},
-        {'title': 'Сотрудники', 'url_name': 'employee_list'},
-        {'title': 'Заказы', 'url_name': 'order_list'},
+menu = [{'title': 'О Сайте', 'url_name': 'myapp:about'},
+        {'title': 'Машины парка', 'url_name': 'myapp:cars'},
+        {'title': 'Водители парка', 'url_name': 'myapp:drivers'},
+        {'title': 'Клиенты', 'url_name': 'myapp:clients'},
+        {'title': 'Сотрудники', 'url_name': 'myapp:employee_list'},
+        {'title': 'Заказы', 'url_name': 'myapp:order_list'},
         ]
 
 #def index(request):

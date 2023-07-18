@@ -1,20 +1,30 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 # Create your models here.
 # Create migrations: python manage.py makemigration
 # Migrate: python manage.py migrate
+
 class Driver(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Имя')
-    age = models.IntegerField(verbose_name='Возраст')
-    city = models.CharField(max_length=100, verbose_name='Город')
+    firstname = models.CharField(max_length=100, verbose_name='Имя')
+    lastname = models.CharField(max_length=100, verbose_name='Фамилия', default='')
+    birthday = models.DateField(verbose_name='Дата рождения', default=date.today)
+    city = models.CharField(max_length=100, verbose_name='Город', null=True)
+    passport = models.CharField(max_length=15, verbose_name='Паспорт', null=False, unique=True)
+    email = models.EmailField(verbose_name='Эл. почта', unique=True)
     is_activated = models.BooleanField(verbose_name='Активация', default=True)
 
     def __str__(self):
-        return self.name
+        return ' '.join[str(self.firstname), str(self.lastname)]
+
     class Meta:
         verbose_name = 'Водитель'
         verbose_name_plural = 'Водители'
+        ordering = ['lastname', '-birthday']    # -birthday обратная сортировка
+        unique_together = (
+            ('firstname', 'lastname', 'passport'),
+        )
 
 # class Car(models.Model):
 #     brand = models.CharField(max_length=30, verbose_name='Марка')
@@ -32,8 +42,8 @@ class Driver(models.Model):
 
 
 class Client(models.Model):
-    name = models.CharField(max_length=30, verbose_name='Имя')
-    last_name = models.CharField(max_length=30, verbose_name='Фамилия')
+    firstname = models.CharField(max_length=30, verbose_name='Имя')
+    lastname = models.CharField(max_length=30, verbose_name='Фамилия')
     birthday = models.DateField(verbose_name='Дата рождения')
     age = models.IntegerField(verbose_name='Возраст', null=True)
     city = models.CharField(max_length=30, verbose_name='Город')
@@ -42,7 +52,7 @@ class Client(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return ' '.join([self.name, self.last_name])
+        return ' '.join[str(self.firstname), str(self.lastname)]
 
     class Meta:
         verbose_name = 'Клиент'
@@ -110,6 +120,9 @@ class Car(models.Model):
     class Meta:
         verbose_name = 'Машина'
         verbose_name_plural = 'Машины'
+        ordering = ['year', 'model']
+        # отображение будет от самого старшего года по возростанию,
+        # знак - перед полем -означает обратный порядок
 
 
 class Order(models.Model):
