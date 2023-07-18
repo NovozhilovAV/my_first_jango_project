@@ -158,7 +158,7 @@ def car_detail(request, pk):
     title = 'Car detail'
     context = {'object': car, 'title': title}
 
-    return render(request, 'main/car_detail.html', context=context)
+    return render(request, 'myapp/car_detail.html', context=context)
 
 
 def client_card(request, pk):

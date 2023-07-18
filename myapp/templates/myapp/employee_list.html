@@ -17,7 +17,7 @@
          <tr>
             <td align="center" >{{emp.id}}</td>
             <td align="center">
-                <a href="{% url 'main:employee_detail' pk=emp.id %}">{{emp.firstname}}</a>
+                <a href="{% url 'myapp:employee_detail' pk=emp.id %}">{{emp.firstname}}</a>
 <!-- создает ссылку, emp-переменнная цикла  -->
 
             </td>
@@ -32,7 +32,7 @@
 Количество - {{count}}
 
 
-<p><a href="{% url 'main:employee_form' %}">Добавить сотрудника</a></p>
+<p><a href="{% url 'myapp:employee_form' %}">Добавить сотрудника</a></p>
 
 
 <div class="pagination">

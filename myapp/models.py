@@ -122,7 +122,7 @@ class Order(models.Model):
         return ' '.join([str(self.id), str(self.client)])
 
     def get_absolute_url(self):
-        return reverse('main:order_list')
+        return reverse('myapp:order_list')
 
     class Meta:
         verbose_name = 'Заказ'
