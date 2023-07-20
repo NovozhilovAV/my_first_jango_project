@@ -77,7 +77,7 @@ class Employee(models.Model):
     #  переопределяем для вывода имя и фамилии
 
     def get_absolute_url(self):
-        return reverse('employee_list')
+        return reverse('myapp:employee_list')
     # ссылка для перехода к описанию сотрудника
     # получаем адрес по абсолютному имени пути
 

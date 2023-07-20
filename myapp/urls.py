@@ -16,14 +16,14 @@ urlpatterns = [
     path('clients/', clients, name='clients'),
 
     path('add_car/', add_car, name='add_car'),
-    path('add_client/', add_client, name='add_client'),
-    path('add_driver/', add_driver, name='add_driver'),
+    path('add_client/', add_client, name='client_add'),
+    path('add_driver/', add_driver, name='driver_add'),
     path('clients/<int:pk>', client_card, name='client_card'),
 
     # указываем путь, и вызывве его как представление as_view()
     path('employees/', EmployeeList.as_view(), name='employee_list'),
     path('employees/<int:pk>/', EmployeeDetail.as_view(), name='employee_detail'),
-    path('employees_form/', EmployeeCreate.as_view(), name='employee_create'),
+    path('employees_form/', EmployeeCreate.as_view(), name='employee_form'),
     path('employees/<int:pk>/', EmployeeUpdate.as_view(), name='employee_update'),
 
     path('orders/', OrderList.as_view(), name='order_list'),
